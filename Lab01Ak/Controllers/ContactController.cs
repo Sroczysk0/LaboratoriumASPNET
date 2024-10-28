@@ -44,4 +44,34 @@ public class ContactController : Controller
     {
         return View(_contacts[id]);
     }
+    
+    public IActionResult Edit(int id)
+    {
+        if (_contacts.TryGetValue(id, out var contact))
+        {
+            return View(contact);
+        }
+        return NotFound();
+    }
+
+    // POST: Zapisz zmiany kontaktu
+    [HttpPost]
+    public IActionResult Edit(ContactModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+        
+        if (_contacts.ContainsKey(model.Id))
+        {
+            _contacts[model.Id] = model;
+            return RedirectToAction("Index");
+        }
+        
+        return NotFound();
+    }
 }
+
+
+  

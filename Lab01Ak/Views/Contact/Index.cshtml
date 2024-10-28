@@ -31,9 +31,10 @@
                 @entry.Value.LastName
             </td>
             <td>
-                <a class="btn btn-success">Edit</a>
                 <a asp-controller="Contact" asp-action="Details" asp-route-id="@entry.Key" class="btn btn-info">Info</a>
                 <a asp-controller="Contact" asp-action="Delete" asp-route-id="@entry.Value.Id" class="btn btn-danger">Delete</a>
+                <a asp-controller="Contact" asp-action="Edit" asp-route-id="@entry.Key" class="btn btn-success">Edit</a>
+
             </td>
         </tr>
     }
