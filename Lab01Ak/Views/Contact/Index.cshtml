@@ -1,4 +1,5 @@
-﻿@model Dictionary<int, Lab01Ak.Models.ContactModel>
+﻿@using LaboratoriumASPNET.Models
+@model List<ContactModel>
 
 @{
     ViewBag.Title = "title";
@@ -7,33 +8,39 @@
 
 <h2>Kontakty</h2>
 <a class="btn btn-primary" asp-action="Add" asp-controller="Contact">Dodaj kontakt</a>
+<h3>Lista kontaktów:</h3>
+@if (Model.Count > 0)
+{
+    
+
 <table class="table">
     <thead>
     <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            LastName
-        </th>
-        <th>
-            Action
-        </th>
+        
+        <th>@Html.DisplayNameFor(m => m[0].FirstName )</th>
+        <th>@Html.DisplayNameFor(m => m[0].LastName )</th>
+        <th>@Html.DisplayNameFor(m => m[0].Category )</th>
+        <th class="text-end">Operajce</th>
+
+
     </tr>
     <tbody>
     @foreach (var entry in @Model)
     {
         <tr>
             <td>
-                @entry.Value.FirstName
+                @entry.FirstName
             </td>
             <td>
-                @entry.Value.LastName
+                @entry.LastName
             </td>
             <td>
-                <a asp-controller="Contact" asp-action="Details" asp-route-id="@entry.Key" class="btn btn-info">Info</a>
-                <a asp-controller="Contact" asp-action="Delete" asp-route-id="@entry.Value.Id" class="btn btn-danger">Delete</a>
-                <a asp-controller="Contact" asp-action="Edit" asp-route-id="@entry.Key" class="btn btn-success">Edit</a>
+                @entry.Category
+            </td>
+            <td>
+                <a asp-controller="Contact" asp-action="Details" asp-route-id="@entry.Id" class="btn btn-info">Info</a>
+                <a asp-controller="Contact" asp-action="Delete" asp-route-id="@entry.Id" class="btn btn-danger">Delete</a>
+                <a asp-controller="Contact" asp-action="Edit" asp-route-id="@entry.Id" class="btn btn-success">Edit</a>
 
             </td>
         </tr>
@@ -42,3 +49,8 @@
     </thead>
 
 </table>
+}
+else
+{
+    <h2>Brak kontakow</h2>
+}
