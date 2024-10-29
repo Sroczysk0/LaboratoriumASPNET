@@ -1,3 +1,6 @@
+using Lab01Ak.Models;
+using LaboratoriumASPNET.Models.Services;
+
 namespace Lab01Ak
 {
     public class Program
@@ -8,7 +11,7 @@ namespace Lab01Ak
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddSingleton<IContactService, MemoryContactService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

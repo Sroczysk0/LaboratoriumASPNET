@@ -1,27 +1,33 @@
 ﻿using Lab01Ak.Models;
+using LaboratoriumASPNET.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaboratoriumASPNET.Controllers;
 
 public class ContactController : Controller
 {
-    //rozwiazanie tymczasowe
-    static private Dictionary<int, ContactModel> _contacts = new Dictionary<int, ContactModel>(){};
+    private readonly IContactService _contactService;
 
-    private static int currentId = 0;
+    // Konstruktor z wstrzykiwaniem zależności
+    public ContactController(IContactService contactService)
+    {
+        _contactService = contactService;
+    }
+
     // Lista kontaktów
     public IActionResult Index()
     {
-        return View(_contacts);
+        // Przekazujemy listę kontaktów do widoku
+        return View(_contactService.GetAll());
     }
     
-    //formularz dodania kontaktu
+    // Formularz dodania kontaktu
     public IActionResult Add()
     {
         return View();
     }
 
-    // odebranie danych z formularza i zapisanie w kontaktach
+    // Odebranie danych z formularza i zapisanie w kontaktach
     [HttpPost]
     public IActionResult Add(ContactModel model)
     {
@@ -29,29 +35,43 @@ public class ContactController : Controller
         {
             return View(model);
         }
-        model.Id = currentId++;
-        _contacts.Add(model.Id, model);
-        return View("Index", _contacts);
+        
+        _contactService.Add(model);
+
+        // Przekierowanie do listy kontaktów po dodaniu nowego kontaktu
+        return RedirectToAction("Index");
     }
 
+    // Usunięcie kontaktu
     public IActionResult Delete(int id)
     {
-        _contacts.Remove(id);
-        return View("Index", _contacts);
+        _contactService.Delete(id);
+
+        // Przekierowanie do listy kontaktów po usunięciu kontaktu
+        return RedirectToAction("Index");
     }
 
+    // Szczegóły kontaktu
     public IActionResult Details(int id)
     {
-        return View(_contacts[id]);
+        var contact = _contactService.GetById(id);
+        if (contact == null)
+        {
+            return NotFound();
+        }
+        return View(contact);
     }
     
+    // Formularz edycji kontaktu
     public IActionResult Edit(int id)
     {
-        if (_contacts.TryGetValue(id, out var contact))
+        var contact = _contactService.GetById(id);
+        if (contact == null)
         {
-            return View(contact);
+            return NotFound();
         }
-        return NotFound();
+        
+        return View(contact);
     }
 
     // POST: Zapisz zmiany kontaktu
@@ -63,15 +83,7 @@ public class ContactController : Controller
             return View(model);
         }
         
-        if (_contacts.ContainsKey(model.Id))
-        {
-            _contacts[model.Id] = model;
-            return RedirectToAction("Index");
-        }
-        
-        return NotFound();
+        _contactService.Update(model);
+        return RedirectToAction("Index");
     }
 }
-
-
-  
