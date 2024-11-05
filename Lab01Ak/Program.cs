@@ -1,4 +1,5 @@
 using Lab01Ak.Models;
+using LaboratoriumASPNET.Models;
 using LaboratoriumASPNET.Models.Services;
 
 namespace Lab01Ak
@@ -8,10 +9,12 @@ namespace Lab01Ak
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            builder.Services.AddDbContext<AppDbContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IContactService, MemoryContactService>();
+            builder.Services.AddTransient<IContactService, EFContactService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
