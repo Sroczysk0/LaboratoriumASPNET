@@ -40,7 +40,7 @@ public class EFContactService : IContactService
 
     public ContactModel? GetById(int id)
     {
-        //pobranie kontaktu z zalaczeniem wlasciowosci nawigacyjnej
+        //pobranie kontaktu z zalaczeniem wlasciowosci nawigacyjnej organizations
         var entity = _context.Contacts
             .Include(e => e.Organization).FirstOrDefault(e => e.Id == id);
         return entity != null? ContactMapper.FromEntity(entity) : null;
