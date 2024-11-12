@@ -14,7 +14,10 @@ public class ContactMapper
             BirthDate = entity.BirthDate,
             PhoneNumber = entity.PhoneNumber,
             Email = entity.Email,
-            Category = entity.Category
+            Category = entity.Category,
+            OrganizationId = entity.OrganizationId
+                
+                //dodaj mapowanie dla categoty
         };
     }
 
@@ -28,7 +31,9 @@ public class ContactMapper
             BirthDate = model.BirthDate,
             PhoneNumber = model.PhoneNumber,
             Email = model.Email,
-            Category = model.Category
+            Category = model.Category,
+            OrganizationId = model.OrganizationId
+            //mapowanie dla cateogory
         };
     }
 }

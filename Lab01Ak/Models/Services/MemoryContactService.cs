@@ -78,4 +78,9 @@ public class MemoryContactService : IContactService
         _contacts.TryGetValue(id, out var contact);
         return contact;
     }
+
+    public List<OrganizationEntity> FindAllOrganizations()
+    {
+        throw new NotImplementedException();
+    }
 }

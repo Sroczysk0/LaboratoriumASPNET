@@ -46,12 +46,17 @@ namespace LaboratoriumASPNET.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("contacts");
 
@@ -61,12 +66,120 @@ namespace LaboratoriumASPNET.Migrations
                             Id = 1,
                             BirthDate = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Category = 0,
-                            Created = new DateTime(2024, 11, 5, 12, 52, 2, 238, DateTimeKind.Local).AddTicks(7669),
+                            Created = new DateTime(2024, 11, 12, 12, 16, 3, 14, DateTimeKind.Local).AddTicks(9857),
                             Email = "ewa@wsei.edu.pl",
                             FirstName = "Adam",
                             LastName = "Nowak",
+                            OrganizationId = 1,
+                            PhoneNumber = "123123123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthDate = new DateTime(2001, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Category = 0,
+                            Created = new DateTime(2024, 11, 12, 12, 16, 3, 14, DateTimeKind.Local).AddTicks(9920),
+                            Email = "ola@wsei.edu.pl",
+                            FirstName = "Ola",
+                            LastName = "Nowak",
+                            OrganizationId = 2,
                             PhoneNumber = "123123123"
                         });
+                });
+
+            modelBuilder.Entity("LaboratoriumASPNET.Models.OrganizationEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nip")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Regon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("organizations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "WSEI",
+                            Nip = "123456",
+                            Regon = "321321321"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Famo",
+                            Nip = "432432",
+                            Regon = "123123123"
+                        });
+                });
+
+            modelBuilder.Entity("LaboratoriumASPNET.Models.ContactEntity", b =>
+                {
+                    b.HasOne("LaboratoriumASPNET.Models.OrganizationEntity", "Organization")
+                        .WithMany("Contacts")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("LaboratoriumASPNET.Models.OrganizationEntity", b =>
+                {
+                    b.OwnsOne("LaboratoriumASPNET.Models.Address", "Address", b1 =>
+                        {
+                            b1.Property<int>("OrganizationEntityId")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrganizationEntityId");
+
+                            b1.ToTable("organizations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrganizationEntityId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    OrganizationEntityId = 1,
+                                    City = "Kraków",
+                                    Street = "Św. Filipa 17"
+                                },
+                                new
+                                {
+                                    OrganizationEntityId = 2,
+                                    City = "Warszawa",
+                                    Street = "Wesoła 15"
+                                });
+                        });
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("LaboratoriumASPNET.Models.OrganizationEntity", b =>
+                {
+                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }

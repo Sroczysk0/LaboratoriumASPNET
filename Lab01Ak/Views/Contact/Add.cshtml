@@ -46,6 +46,11 @@
             <span asp-validation-for="Category"></span>
         </div>
 
+        <div>
+            <label class="form-label"  asp-for="OrganizationId">Wybierz organizację</label>
+            <select asp-for="OrganizationId" asp-items="@Model.Organizations"></select>
+        </div>
+
 
         <button type="submit" class="btn btn-outline-primary">Add</button>
     </form>
