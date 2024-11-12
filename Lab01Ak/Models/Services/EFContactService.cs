@@ -1,4 +1,5 @@
 ﻿using Lab01Ak.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaboratoriumASPNET.Models.Services;
 
@@ -39,7 +40,9 @@ public class EFContactService : IContactService
 
     public ContactModel? GetById(int id)
     {
-        var entity = _context.Contacts.Find(id);
+        //pobranie kontaktu z zalaczeniem wlasciowosci nawigacyjnej
+        var entity = _context.Contacts
+            .Include(e => e.Organization).FirstOrDefault(e => e.Id == id);
         return entity != null? ContactMapper.FromEntity(entity) : null;
     }
 
