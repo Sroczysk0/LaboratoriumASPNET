@@ -8444,19 +8444,19 @@
     ]
   },
   "packageFolders": {
-    "D:\\Users\\jakub.putowski\\.nuget\\packages\\": {}
+    "C:\\Users\\LENOVO\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\jakub.putowski\\RiderProjects\\Labolatorium-ASP-.NET-lab6\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\GitHub\\Labolatorium-ASP-.NET-lab6\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "D:\\Users\\jakub.putowski\\RiderProjects\\Labolatorium-ASP-.NET-lab6\\Project.csproj",
-      "packagesPath": "D:\\Users\\jakub.putowski\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\jakub.putowski\\RiderProjects\\Labolatorium-ASP-.NET-lab6\\obj\\",
+      "projectPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Labolatorium-ASP-.NET-lab6\\Project.csproj",
+      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Labolatorium-ASP-.NET-lab6\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "D:\\Users\\jakub.putowski\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8464,6 +8464,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8476,6 +8477,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -8538,7 +8544,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
